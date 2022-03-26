@@ -1,5 +1,8 @@
-const Validation = require('./Validation/authSchema');
+const authSchema = require('./Validation/authSchema');
+const costumizesErr = require('./Validation/costumizesErr');
 
 module.exports = {
-  ...Validation,
+  authSchema,
+  costumizesErr,
+
 };
