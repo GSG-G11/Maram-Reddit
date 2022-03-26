@@ -1,6 +1,6 @@
 const { hash } = require('bcryptjs');
 const { getUniqueEmailQuery, signUpQuery } = require('../database');
-const { costumizesErr } = require('../utils');
+const { costumizesErr, signToken } = require('../utils');
 const signUpSchema = require('../utils/Validation/authSchema');
 
 const signUp = (req, res, next) => {
@@ -15,6 +15,7 @@ const signUp = (req, res, next) => {
         return hash(password, 8);
       }
     }).then((hashPassword) => signUpQuery({ user_name, email, password: hashPassword }))
+    .then(({ row }) => signToken({ userid: row.id }))
     .then((result) => console.log(result))
     .catch((err) => {
       if (err.name === 'ValidationError') {
