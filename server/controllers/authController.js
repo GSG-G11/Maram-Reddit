@@ -15,8 +15,10 @@ const signUp = (req, res, next) => {
         return hash(password, 8);
       }
     }).then((hashPassword) => signUpQuery({ user_name, email, password: hashPassword }))
-    .then(({ row }) => signToken({ userid: row.id }))
-    .then((result) => console.log(result))
+    .then(({ rows }) => signToken({ userId: rows.id }))
+    .then((token) => {
+      res.cookie('token', token).json('Sign Up');
+    })
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(costumizesErr(err.details[0].message, 400));
@@ -24,7 +26,6 @@ const signUp = (req, res, next) => {
         next(err);
       }
     });
-  // res.end();
 };
 module.exports = {
   signUp,
