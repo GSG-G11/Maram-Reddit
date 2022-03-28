@@ -7,4 +7,12 @@ const signUpSchema = joi.object({
   password: joi.string().alphanum().required().min(8),
 });
 
-module.exports = signUpSchema;
+const loginSchema = joi.object({
+  email: joi.string().email().required(),
+  password: joi.string().alphanum().min(8).required(),
+});
+
+module.exports = {
+  signUpSchema,
+  loginSchema,
+};

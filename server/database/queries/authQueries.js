@@ -8,6 +8,14 @@ const signUpQuery = ({ user_name, email, password }) => {
   return connection.query(sql);
 };
 
+const loginQuery = (email) => {
+  const sql = {
+    text: 'select * from users where email = $1',
+    values: [email],
+  };
+  return connection.query(sql);
+};
 module.exports = {
+  loginQuery,
   signUpQuery,
 };

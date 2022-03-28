@@ -1,9 +1,10 @@
-const authSchema = require('./Validation/authSchema');
+const { signUpSchema, loginSchema } = require('./Validation/authSchema');
 const { costumizesErr } = require('./Validation/costumizesErr');
 const signToken = require('./FunPromise/signToken');
 
 module.exports = {
-  authSchema,
+  signUpSchema,
+  loginSchema,
   costumizesErr,
   signToken,
 
