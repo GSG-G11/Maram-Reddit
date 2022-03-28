@@ -20,7 +20,7 @@ const signUp = (req, res, next) => {
     )
     .then(({ rows }) => signToken({ userId: rows.id }))
     .then((token) => {
-      res.cookie('token', token).json('Sign Up');
+      res.cookie('token', token).json({ message: 'you are signed up successfully' });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -50,7 +50,7 @@ const login = (req, res, next) => {
       }
     })
     .then((token ) => {
-      res.cookie('token', token).json('login');
+      res.cookie('token', token).json({ message: 'Welcome again ' });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

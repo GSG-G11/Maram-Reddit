@@ -1,8 +1,5 @@
-const { getUniqueEmailQuery } = require('./queries/getUniqueQuery');
-const { signUpQuery, loginQuery } = require('./queries/authQueries');
+const queries = require('./queries');
 
 module.exports = {
-  getUniqueEmailQuery,
-  loginQuery,
-  signUpQuery,
+  ...queries,
 };
