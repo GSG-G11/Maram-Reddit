@@ -1,3 +1,4 @@
-body{
-  background-color: red;
+nav{
+  display: flex;
+  justify-content: space-between;
 }
