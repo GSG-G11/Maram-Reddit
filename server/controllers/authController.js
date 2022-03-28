@@ -1,10 +1,10 @@
-const { hash } = require('bcryptjs');
-const { getUniqueEmailQuery, signUpQuery } = require('../database');
+const { hash, compare } = require('bcryptjs');
+const { getUniqueEmailQuery, signUpQuery, loginQuery } = require('../database');
 const { costumizesErr, signToken } = require('../utils');
-const signUpSchema = require('../utils/Validation/authSchema');
+const { signUpSchema, loginSchema } = require('../utils/Validation/authSchema');
 
 const signUp = (req, res, next) => {
-  const { user_name, email, password} = req.body;
+  const { user_name, email, password } = req.body;
   signUpSchema
     .validateAsync(req.body)
     .then(() => getUniqueEmailQuery(email))
@@ -14,7 +14,10 @@ const signUp = (req, res, next) => {
       } else {
         return hash(password, 8);
       }
-    }).then((hashPassword) => signUpQuery({ user_name, email, password: hashPassword }))
+    })
+    .then((hashPassword) =>
+      signUpQuery({ user_name, email, password: hashPassword })
+    )
     .then(({ rows }) => signToken({ userId: rows.id }))
     .then((token) => {
       res.cookie('token', token).json('Sign Up');
@@ -27,6 +30,37 @@ const signUp = (req, res, next) => {
       }
     });
 };
+
+const login = (req, res, next) => {
+  const { email, password } = req.body;
+  loginSchema
+    .validateAsync(req.body)
+    .then(({ email }) => loginQuery(email))
+    .then((data) => {
+      if (data.rowCount) {
+        userId = data.rows[0].id;
+        return compare(password, data.rows[0].password);
+      }
+    })
+    .then((value) => {
+      if (value === true) {
+        return signToken({ id: userId });
+      } else {
+        throw costumizesErr('You do not have account , please login....', 400);
+      }
+    })
+    .then((token ) => {
+      res.cookie('token', token).json('login');
+    })
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        res.json({ massage: err });
+      } else {
+        next(err);
+      }
+    });
+};
 module.exports = {
   signUp,
+  login,
 };

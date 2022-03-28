@@ -7,5 +7,6 @@ const getUniqueEmailQuery = (email) => {
   };
   return connection.query(sql);
 };
-
-module.exports = getUniqueEmailQuery;
+module.exports = {
+  getUniqueEmailQuery,
+};
