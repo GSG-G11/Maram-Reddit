@@ -60,7 +60,12 @@ const login = (req, res, next) => {
       }
     });
 };
+
+const logout = (req, res) => {
+  res.clearCookie('token').json({ massage: 'You are logout ' });
+};
 module.exports = {
   signUp,
   login,
+  logout,
 };

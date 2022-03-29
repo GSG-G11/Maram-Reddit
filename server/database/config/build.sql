@@ -9,6 +9,14 @@ CREATE TABLE users(
 
  );
 
+ CREATE TABLE posts(
+ id SERIAL PRIMARY Key,
+ content text NOT NULL,
+ title varchar(200) NOT NULL,
+  user_id int,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+ );
+
  INSERT INTO users(user_name , email,password)Values('maram','m@gmail.com','123456');
 
 COMMIT;
