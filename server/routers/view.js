@@ -11,7 +11,7 @@ viewRouter.get('/login', (req, res) => {
 });
 
 viewRouter.get('/signup', (req, res) => {
-  res.sendFile(join(__dirname, '..', '..', 'views', 'signup.html'));
+  res.sendFile(join(__dirname, '..', '..', 'views', 'signUp.html'));
 });
 
 viewRouter.get('/home', authMiddleware, (req, res) => {
