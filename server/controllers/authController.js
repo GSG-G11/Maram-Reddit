@@ -15,10 +15,17 @@ const signUp = (req, res, next) => {
         return hash(password, 8);
       }
     })
-    .then((hashPassword) =>
-      signUpQuery({ user_name, email, password: hashPassword })
+    .then((hashPassword) =>{
+     return signUpQuery({ user_name, email, password: hashPassword })
+    }
+   
     )
-    .then(({ rows }) => signToken({ userId: rows.id }))
+    .then(({ rows }) => {
+      console.log(rows,"rows id ");
+     return signToken({ userId: rows[0].id })
+    
+    })
+
     .then((token) => {
       res.cookie('token', token).json({ message: 'you are signed up successfully' });
     })
