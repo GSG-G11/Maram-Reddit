@@ -14,8 +14,9 @@ login.addEventListener('click', () => {
     }),
   })
     .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
+    .then(() => {
+      // console.log(data);
+      window.location.href = '/home';
     })
     .catch((err) => {
       console.log(err);
