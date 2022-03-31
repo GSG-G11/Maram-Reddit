@@ -17,5 +17,5 @@ const getAllPostsQuery = () => {
 };
 module.exports = {
   addPostQuery,
-  getAllPostsQuery
-}
+  getAllPostsQuery,
+};

@@ -9,13 +9,10 @@
   <title>Reddit </title>
 </head>
 <body>
-   <nav>
+   <nav class="nav">
      <div class="logo"><img src="/img/logo.png" alt="logo"></div>
      <form> <input type="search" placeholder="Search" id="search"></form>
-      <div class="auth">
-        
-        <a href="/logout" id="logout">LOG OUT</a>
-      </div>
+        <a href="/logout" class="auth" id="logout">Log out</a>
    </nav>
 
    <main>
@@ -66,6 +63,7 @@
     
      </div>
    </main>
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
    <script src="/js/logout.js"></script>
    <script src="/js/home.js"></script>
 </body>

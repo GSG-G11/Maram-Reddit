@@ -6,8 +6,7 @@ const authMiddleware = (req, res, next) => {
   if (!token) return res.status(302).redirect('/');
   return checkToken(token)
     .then((data) => {
-      console.log(data,"data auth");
-     req.userId = data.userId;
+      req.userId = data.userId;
       next();
     })
     .catch((err) => {

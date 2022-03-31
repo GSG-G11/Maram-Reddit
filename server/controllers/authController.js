@@ -21,7 +21,6 @@ const signUp = (req, res, next) => {
    
     )
     .then(({ rows }) => {
-      console.log(rows,"rows id ");
      return signToken({ userId: rows[0].id })
     
     })
@@ -40,6 +39,7 @@ const signUp = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
+  let userId;
   loginSchema
     .validateAsync(req.body)
     .then(({ email }) => loginQuery(email))
@@ -51,7 +51,7 @@ const login = (req, res, next) => {
     })
     .then((value) => {
       if (value === true) {
-        return signToken({ id: userId });
+        return signToken({ userId: userId });
       } else {
         throw costumizesErr('You do not have account , please login....', 400);
       }

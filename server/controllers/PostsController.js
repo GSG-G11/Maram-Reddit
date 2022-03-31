@@ -3,10 +3,10 @@ const { addPostQuery, getAllPostsQuery } = require('../database/queries/PostsQue
 const addPost = (req, res, next) => {
   const { content } = req.body;
   const user_id = req.userId;
-  console.log(user_id,"user id ");
+  console.log(user_id,"post");
   addPostQuery(user_id, content).then((data) => {
-    console.log(data);
     res.status(201).json({
+      status: 201,
       message: 'post added successfully',
       post: data.rows,
     });
