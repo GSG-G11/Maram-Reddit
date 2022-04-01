@@ -5,6 +5,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 apiRouter.post('/addPost', authMiddleware, PostsController.addPost);
 apiRouter.get('/getAllPosts', PostsController.getAllPosts);
+apiRouter.get('/posts/:id', PostsController.getSinglePost);
 apiRouter.get('/user', authMiddleware, UsersControllers.getUserName);
 
 module.exports = apiRouter;

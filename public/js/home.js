@@ -15,7 +15,6 @@ btnAdd.addEventListener('click', (e) => {
       content: createPost.value,
     }),
   }).then((data) => {
-    console.log(data);
     if (data.status === 201) {
       swal('success', 'add post successfully', 'success');
     } else {
@@ -28,9 +27,12 @@ btnAdd.addEventListener('click', (e) => {
 
 fetch('/api/v1/getAllposts').then((res) => res.json()).then((data) => {
   data.forEach((ele) => {
+    const a = document.createElement('a');
+    a.href = `/posts/${ele.id}/show`;
+    popularPost.appendChild(a);
     const post = document.createElement('div');
     post.className = 'post';
-    popularPost.appendChild(post);
+    a.appendChild(post);
     const username = document.createElement('span');
     username.className = 'username';
     username.textContent = `posted by ${ele.user_name}`;
@@ -40,7 +42,6 @@ fetch('/api/v1/getAllposts').then((res) => res.json()).then((data) => {
     post.appendChild(contentPost);
   });
 });
-
 fetch('/api/v1/user').then((res) => res.json()).then((data) => {
   const username = document.createElement('span');
   nav.insertBefore(username, auth);

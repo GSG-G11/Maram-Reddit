@@ -17,4 +17,7 @@ viewRouter.get('/signup', (req, res) => {
 viewRouter.get('/home', authMiddleware, (req, res) => {
   res.sendFile(join(__dirname, '..', '..', 'views', 'home.html'));
 });
+viewRouter.get('/posts/:id/show', (req, res) => {
+  res.sendFile(join(__dirname, '..', '..', 'views', 'singlePost.html'));
+});
 module.exports = viewRouter;
