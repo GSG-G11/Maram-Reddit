@@ -29,6 +29,7 @@ fetch('/api/v1/getAllposts').then((res) => res.json()).then((data) => {
   data.forEach((ele) => {
     const a = document.createElement('a');
     a.href = `/posts/${ele.id}/show`;
+    a.className = 'show';
     popularPost.appendChild(a);
     const post = document.createElement('div');
     post.className = 'post';

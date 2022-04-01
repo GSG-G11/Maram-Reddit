@@ -23,8 +23,17 @@ const getSinglePostQuery = (id) => {
   };
   return connection.query(sql);
 };
+
+const getUserPostsQuery = (userId) => {
+  const sql = {
+    text: 'select posts.id,posts.content, posts.user_id, users.user_name from  posts join users on posts.user_id = users.id where posts.user_id = $1 ',
+    values: [userId],
+  };
+  return connection.query(sql);
+};
 module.exports = {
   addPostQuery,
   getAllPostsQuery,
   getSinglePostQuery,
+  getUserPostsQuery,
 };

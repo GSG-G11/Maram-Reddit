@@ -1,4 +1,4 @@
-const { addPostQuery, getAllPostsQuery, getSinglePostQuery } = require('../database/queries/PostsQueries');
+const { addPostQuery, getAllPostsQuery, getSinglePostQuery, getUserPostsQuery } = require('../database/queries/PostsQueries');
 
 const addPost = (req, res, next) => {
   const { content } = req.body;
@@ -26,8 +26,20 @@ const getSinglePost = (req, res, next) => {
     res.json(data.rows[0]);
   }).catch((err) => next(err));
 };
+
+const getUserPosts = (req, res, next) => {
+  const { userId } = req;
+  getUserPostsQuery(userId)
+    .then((data) => {
+      res.json(data.rows);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 module.exports = {
   addPost,
   getAllPosts,
   getSinglePost,
+  getUserPosts,
 };
