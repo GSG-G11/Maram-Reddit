@@ -38,8 +38,8 @@ const getSinglePost = (req, res, next) => {
 };
 
 const getUserPosts = (req, res, next) => {
-  const { userId } = req;
-  getUserPostsQuery(userId)
+  const { id } = req.params;
+  getUserPostsQuery(id)
     .then((data) => {
       res.json(data.rows);
     })
