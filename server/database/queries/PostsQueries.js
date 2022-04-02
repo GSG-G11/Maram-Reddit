@@ -10,7 +10,7 @@ const addPostQuery = (user_id, content) => {
 
 const getAllPostsQuery = () => {
   const sql = {
-    text: 'select posts.id ,users.user_name , posts.content from posts join users on posts.user_id = users.id',
+    text: 'select posts.id ,users.user_name ,posts.user_id, posts.content from posts join users on posts.user_id = users.id',
     values: [],
   };
   return connection.query(sql);

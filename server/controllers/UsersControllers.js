@@ -4,7 +4,8 @@ const getUserName = (req, res, next) => {
   const { userId } = req;
   getUserNameQuery(userId)
     .then((data) => {
-      res.json(data.rows[0].user_name);
+      console.log(data,"user info");
+      res.json(data.rows);
     }).catch((err) => {
       next(err);
     });

@@ -10,7 +10,7 @@ const getUniqueEmailQuery = (email) => {
 
 const getUserNameQuery = (userId) => {
   const sql = {
-    text: 'select user_name from users where users.id = $1',
+    text: 'select users.user_name , users.id  from users where users.id = $1',
     values: [userId],
   };
   return connection.query(sql);
