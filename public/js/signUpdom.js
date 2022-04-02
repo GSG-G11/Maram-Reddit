@@ -16,14 +16,13 @@ signBtn.addEventListener('click', () => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-    if (data.message === 'you are signed up successfully'){
-         window.location.href = '/home';
-    } else {
-      swal('error',data.message, 'error');
-    }
+      if (data.message === 'you are signed up successfully') {
+        window.location.href = '/home';
+      } else {
+        swal ('error',data.message, 'error');
+      }
     })
     .catch((err) => {
-      console.log(err);
+      swal ('error', err.message, 'error');
     });
 });
